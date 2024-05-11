@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please provide your password"],
         min: 8,
         max: 64
-    },
-    role: {
-        type: String,
-        defult: "user"
     }
+    // role: {
+    //     type: String,
+    //     default: "user"
+    // }
 }, { timestamps: true })
 module.exports = mongoose.model('User', userSchema);

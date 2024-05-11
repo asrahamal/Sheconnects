@@ -1,37 +1,35 @@
-const express = require("express")
-const cors = require("cors")
-const dotenv = require("dotenv")
-const colors = require("colors")
-const morgan = require("morgan")
-const connectDB = require("./config/db")
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const colors = require("colors");
+const morgan = require("morgan");
+const connectDB = require("./config/db");
 
-//DOTENV
+// DOTENV
 dotenv.config();
 
-//mongodb connection
+// MongoDB Connection
 connectDB();
 
-//REST OBJECT
-const app = express()
 
+const app = express();
 
-//middlewares
-app.use(cors({
-    origin: [
-        "0.0.0.0",
-    ],
-}))
-app.use(express, express.json())
-app.use(morgan("dev"))
-app.get("/", (req, res) => {
-    res.send("hello world")
-})
-//ROUTES 
-app.use("api/v1/auth", require("./routes/userRoutes"))
-//PORT
-const PORT = process.env.PORT || 3000
+// Middlewares
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
 
-//listen
+// Test Route
+// app.get("/", (req, res) => {
+//     res.send("hello world");
+// });
+
+app.use("/api/v1/auth", require("./routes/userRoutes"));
+
+// Port Configuration
+const PORT = process.env.PORT || 3000;
+
+// Server Listen
 app.listen(PORT, () => {
-    console.log(`Server Running ${PORT}`.bgCyan.white);
+    console.log(`Server Running on port ${PORT}`.bgCyan.white);
 });
